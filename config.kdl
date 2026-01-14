@@ -1,0 +1,60 @@
+cat > ~/.config/niri/config.kdl <<EOF
+// --- АВТОЗАПУСК ---
+// Запускаем бар (Rust)
+spawn-at-startup "ironbar"
+
+// Запускаем уведомления (Rust)
+spawn-at-startup "swaync"
+
+// Ставим серый фон (пока нет картинки), чтобы глаза не вытекли
+spawn-at-startup "swaybg" "-c" "#333333"
+
+// --- НАСТРОЙКИ ВВОДА ---
+input {
+    keyboard {
+        xkb {
+            // Русская и английская раскладки
+            layout "us,ru"
+            options "grp:alt_shift_toggle"
+        }
+    }
+    touchpad {
+        tap
+        natural-scroll
+    }
+}
+
+// --- ГОРЯЧИЕ КЛАВИШИ ---
+binds {
+    // Главное: Терминал Ghostty
+    Mod+Return { spawn "ghostty"; }
+
+    // Меню приложений Fuzzel
+    Mod+D { spawn "fuzzel"; }
+
+    // Центр уведомлений (открыть/закрыть)
+    Mod+N { spawn "swaync-client" "-t" "-sw"; }
+
+    // Закрыть окно
+    Mod+Q { close-window; }
+    
+    // Выход из Niri (разлогиниться)
+    Mod+Shift+E { quit; }
+
+    // --- УПРАВЛЕНИЕ ОКНАМИ (ЛЕНТА) ---
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    
+    // Перемещение окон
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+
+    // Скролл колесом мыши
+    Mod+WheelScrollDown      { focus-column-right; }
+    Mod+WheelScrollUp        { focus-column-left; }
+    
+    // Скролл тачпадом (как на маке)
+    Mod+TouchpadScrollDown   { focus-column-right; }
+    Mod+TouchpadScrollUp     { focus-column-left; }
+}
+EOF
